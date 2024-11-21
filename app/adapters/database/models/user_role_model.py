@@ -23,5 +23,5 @@ class UserRole(BaseModel):
     user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"), nullable=False)
     role_id = Column(UUID(as_uuid=True), ForeignKey("role.id"), nullable=False)
 
-    user = relationship("User", back_populates="role")
+    user = relationship("User", back_populates="roles")
     role = relationship("Role", back_populates="user")

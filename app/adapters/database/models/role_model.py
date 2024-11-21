@@ -20,5 +20,5 @@ class Role(BaseModel):
     name = Column(String, unique=True, nullable=False)
     description = Column(String, nullable=True)
 
-    users = relationship("UserRole", back_populates="role")
+    user = relationship("UserRole", back_populates="role")
     permissions = relationship("RolePermission", back_populates="role")

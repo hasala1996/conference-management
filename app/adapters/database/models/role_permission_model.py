@@ -24,5 +24,5 @@ class RolePermission(BaseModel):
         UUID(as_uuid=True), ForeignKey("permission.id"), nullable=False
     )
 
-    role = relationship("Role", back_populates="permission")
-    permission = relationship("Permission", back_populates="role")
+    role = relationship("Role", back_populates="permissions")
+    permission = relationship("Permission", back_populates="roles")
