@@ -26,7 +26,7 @@ class Settings:
     DB_HOST: str = os.getenv("DB_HOST", "")
     DB_PORT: str = os.getenv("DB_PORT", "")
     DB_NAME: str = os.getenv("DB_NAME", "")
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTOS", "")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "")
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
         f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
@@ -34,3 +34,4 @@ class Settings:
 
 
 settings = Settings()
+print("ACCESS_TOKEN_EXPIRE_MINUTES0 ", settings.ACCESS_TOKEN_EXPIRE_MINUTES)

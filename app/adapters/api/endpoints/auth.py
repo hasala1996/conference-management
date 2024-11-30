@@ -2,11 +2,10 @@
 Auth endpoints.
 """
 
+from core.auth.schemas import LoginRequest, LoginResponse
+from core.auth.services import AuthService
 from dependencies.auth_service import get_auth_service
 from fastapi import APIRouter, Depends, HTTPException, status
-
-from app.core.auth.schemas import LoginRequest, LoginResponse
-from app.core.auth.services import AuthService
 
 router = APIRouter()
 
@@ -34,5 +33,10 @@ def login(
             detail="Invalid email or password",
         )
 
-    access_token = auth_service.create_access_token(data={"sub": user.email})
+    access_token = auth_service.create_access_token(data={"user_id": str(user.id)})
     return LoginResponse(access_token=access_token)
+
+
+# @router.get("/secure-endpoint", dependencies=[Depends(verify_permission("view_event"))])
+# async def secure_endpoint():
+#     return {"message": "Access granted"}
