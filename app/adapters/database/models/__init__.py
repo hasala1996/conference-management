@@ -3,3 +3,7 @@ from adapters.database.models.role_model import Role
 from adapters.database.models.role_permission_model import RolePermission
 from adapters.database.models.user_model import User
 from adapters.database.models.user_role_model import UserRole
+from adapters.database.models.session_model import Session
+from adapters.database.models.speaker_model import Speaker
+from adapters.database.models.speaker_assignment import SpeakerAssignment
+from adapters.database.models.session_attendee_model import SessionAttendee
