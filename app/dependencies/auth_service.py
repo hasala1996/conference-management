@@ -9,15 +9,31 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 
-def get_auth_service(data_base: Session = Depends(get_db)) -> AuthService:
+def get_user_repository(
+    data_base: Session = Depends(get_db),
+) -> SQLAlchemyUserRepository:
+    """
+    Provides an instance of `SQLAlchemyUserRepository` with its dependencies injected.
+
+    Args:
+        data_base (Session): The database session.
+
+    Returns:
+        SQLAlchemyUserRepository: The repository instance.
+    """
+    return SQLAlchemyUserRepository(data_base)
+
+
+def get_auth_service(
+    user_repository: SQLAlchemyUserRepository = Depends(get_user_repository),
+) -> AuthService:
     """
     Provides an instance of `AuthService` with its dependencies injected.
 
     Args:
-        db (Session): The database session.
+        user_repository (SQLAlchemyUserRepository): The repository instance.
 
     Returns:
         AuthService: The authentication service instance.
     """
-    user_repository = SQLAlchemyUserRepository(data_base)
     return AuthService(user_repository)

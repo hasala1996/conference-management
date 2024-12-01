@@ -8,7 +8,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 
-
 class SessionAttendee(BaseModel):
     """
     SessionAttendee model representing an attendee in a session.
@@ -21,9 +20,11 @@ class SessionAttendee(BaseModel):
 
     __tablename__ = "session_attendee"
 
-    session_id = Column(ForeignKey("session.id", ondelete="CASCADE"), nullable=False)
+    session_id = Column(
+        ForeignKey("scheduled_sessions.id", ondelete="CASCADE"), nullable=False
+    )
     user_id = Column(ForeignKey("user.id", ondelete="CASCADE"), nullable=False)
     attendance_time = Column(DateTime, default=func.now())
 
-    session = relationship("Session", back_populates="attendees")
+    session = relationship("ScheduledSession", back_populates="attendees")
     user = relationship("User")

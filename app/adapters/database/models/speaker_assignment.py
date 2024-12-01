@@ -3,9 +3,9 @@ Session-related models definition.
 """
 
 from adapters.database.models.base_model import BaseModel
-from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy import Column, ForeignKey, String
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
-
 
 
 class SpeakerAssignment(BaseModel):
@@ -20,10 +20,15 @@ class SpeakerAssignment(BaseModel):
 
     __tablename__ = "speaker_assignment"
 
-    session_id = Column(ForeignKey("session.id", ondelete="CASCADE"), nullable=False)
-    speaker_id = Column(ForeignKey("speaker.id", ondelete="CASCADE"), nullable=False)
+    session_id = Column(
+        UUID(as_uuid=True),
+        ForeignKey("scheduled_sessions.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    speaker_id = Column(
+        UUID(as_uuid=True), ForeignKey("speaker.id", ondelete="CASCADE"), nullable=False
+    )
     role = Column(String, nullable=False)
 
-    session = relationship("Session", back_populates="speakers")
+    session = relationship("ScheduledSession", back_populates="speakers")
     speaker = relationship("Speaker", back_populates="assignments")
-

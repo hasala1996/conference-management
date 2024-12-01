@@ -5,7 +5,7 @@ FAST API
 import logging
 
 import fastapi
-from adapters.api.endpoints import auth, user
+from adapters.api.endpoints import auth, session, user
 from core.middleware.error_middleware import ErrorHandlingMiddleware
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -43,6 +43,11 @@ def create_app() -> fastapi.FastAPI:
         user.router,
         prefix="/api/v1/user",
         tags=["user"],
+    )
+    app.include_router(
+        session.router,
+        prefix="/api/v1/session",
+        tags=["session"],
     )
 
     return app
