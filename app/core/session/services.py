@@ -1,3 +1,7 @@
+"""
+Session service implementation.
+"""
+
 from core.common.pagination import Paginated, PaginatedResponse, PaginationParams
 from core.session.ports.session_repository import SessionRepository
 from core.session.schemas import (
@@ -11,6 +15,8 @@ from core.session.schemas import (
 
 
 class SessionService:
+    """Session service implementation."""
+
     def __init__(self, session_repository: SessionRepository):
         """Initialize the session service with a session repository.
 

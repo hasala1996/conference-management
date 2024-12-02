@@ -1,4 +1,6 @@
-from typing import List
+"""
+User API endpoints.
+"""
 
 from core.auth.schemas import UserCreate, UserDetail, UserOut, UserUpdate
 from core.auth.user_service import UserService

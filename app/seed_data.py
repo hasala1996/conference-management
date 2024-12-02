@@ -30,12 +30,12 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
 
-def seed_data(db: Session):
+def seed_data(data_base: Session):
     """
     Seeds the database with admin users, roles, permissions, sessions, and speakers.
 
     Args:
-        db (Session): The database session.
+        data_base (Session): The database session.
     """
     # Create permissions
     permissions = [
@@ -52,9 +52,9 @@ def seed_data(db: Session):
             name=perm_data["name"],
             description=perm_data["description"],
         )
-        db.add(permission)
+        data_base.add(permission)
 
-    db.commit()
+    data_base.commit()
 
     # Create Admin role
     admin_role = Role(
@@ -62,20 +62,20 @@ def seed_data(db: Session):
         name="Admin",
         description="Administrator role with full permissions",
     )
-    db.add(admin_role)
-    db.commit()
+    data_base.add(admin_role)
+    data_base.commit()
 
     # Assign all permissions to Admin role
-    all_permissions = db.query(Permission).all()
+    all_permissions = data_base.query(Permission).all()
     for perm in all_permissions:
         role_permission = RolePermission(
             id=uuid.uuid4(),
             role_id=admin_role.id,
             permission_id=perm.id,
         )
-        db.add(role_permission)
+        data_base.add(role_permission)
 
-    db.commit()
+    data_base.commit()
 
     # Create Admin user
     admin_user = User(
@@ -84,8 +84,8 @@ def seed_data(db: Session):
         password=bcrypt.hash("admin123"),  # Use hashed password
         is_active=True,
     )
-    db.add(admin_user)
-    db.commit()
+    data_base.add(admin_user)
+    data_base.commit()
 
     # Assign Admin role to the user
     user_role = UserRole(
@@ -93,8 +93,8 @@ def seed_data(db: Session):
         user_id=admin_user.id,
         role_id=admin_role.id,
     )
-    db.add(user_role)
-    db.commit()
+    data_base.add(user_role)
+    data_base.commit()
 
     # Create speakers
     speakers_data = [
@@ -118,10 +118,10 @@ def seed_data(db: Session):
             email=speaker_data["email"],
             biography=speaker_data["biography"],
         )
-        db.add(speaker)
+        data_base.add(speaker)
         speakers.append(speaker)
 
-    db.commit()
+    data_base.commit()
 
     # Create sessions
     sessions_data = [
@@ -150,8 +150,8 @@ def seed_data(db: Session):
             end_time=session_data["end_time"],
             capacity=session_data["capacity"],
         )
-        db.add(session)
-        db.commit()
+        data_base.add(session)
+        data_base.commit()
 
         # Assign speakers to the session
         for speaker in speakers:
@@ -161,13 +161,13 @@ def seed_data(db: Session):
                 speaker_id=speaker.id,
                 role="Presenter",
             )
-            db.add(speaker_assignment)
+            data_base.add(speaker_assignment)
 
-        db.commit()
+        data_base.commit()
 
     print("Seed data created successfully!")
 
 
 if __name__ == "__main__":
-    with SessionLocal() as db:
-        seed_data(db)
+    with SessionLocal() as data_base:
+        seed_data(data_base)

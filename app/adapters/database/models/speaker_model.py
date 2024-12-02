@@ -7,7 +7,6 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
-
 class Speaker(BaseModel):
     """
     Speaker model representing a speaker who can be assigned to sessions.
@@ -24,6 +23,6 @@ class Speaker(BaseModel):
     email = Column(String, unique=True, nullable=False, index=True)
     biography = Column(String, nullable=True)
 
-    assignments = relationship("SpeakerAssignment", back_populates="speaker", cascade="all, delete-orphan")
-
-
+    assignments = relationship(
+        "SpeakerAssignment", back_populates="speaker", cascade="all, delete-orphan"
+    )

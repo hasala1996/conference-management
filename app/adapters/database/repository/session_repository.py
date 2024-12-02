@@ -1,3 +1,7 @@
+"""
+Session repository implementation.
+"""
+
 from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID
@@ -17,6 +21,8 @@ from sqlalchemy.orm import Session, joinedload
 
 
 class SessionRepositoryImpl(SessionRepository):
+    """Session repository implementation."""
+
     def __init__(self, db_session: Session):
         """Initialize the session repository with a database session."""
         self.db_session = db_session

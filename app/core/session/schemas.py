@@ -1,3 +1,7 @@
+"""
+Session schemas.
+"""
+
 from datetime import datetime
 from typing import List, Optional
 from uuid import UUID
@@ -18,6 +22,8 @@ class SessionCreate(BaseModel):
     speakers: Optional[List[UUID]] = None
 
     class Config:
+        """Config for session create."""
+
         from_attributes = True
 
 
@@ -45,6 +51,8 @@ class SpeakerOut(BaseModel):
     biography: Optional[str] = None
 
     class Config:
+        """Config for speaker output."""
+
         from_attributes = True
 
 
@@ -62,6 +70,8 @@ class SessionOut(BaseModel):
     is_active: bool
 
     class Config:
+        """Config for session output."""
+
         from_attributes = True
 
 
@@ -80,6 +90,8 @@ class SessionDetail(BaseModel):
     speakers: Optional[List[SpeakerOut]] = None
 
     class Config:
+        """Config for session detail."""
+
         from_attributes = True
 
 
@@ -97,4 +109,6 @@ class SessionListOut(BaseModel):
     is_active: bool
 
     class Config:
+        """Config for session list output."""
+
         from_attributes = True

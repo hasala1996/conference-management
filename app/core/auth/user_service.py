@@ -1,3 +1,7 @@
+"""
+User service implementation.
+"""
+
 from core.auth.ports.repository import UserRepository
 from core.auth.schemas import UserCreate, UserDetail, UserOut, UserUpdate
 from core.common.pagination import Paginated, PaginatedResponse, PaginationParams

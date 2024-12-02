@@ -14,8 +14,6 @@ logging.info("This is an info message")
 
 
 def create_app() -> fastapi.FastAPI:
-    app = FastAPI()
-
     """
     Main FastAPI application setup.
 
@@ -23,6 +21,7 @@ def create_app() -> fastapi.FastAPI:
     routes for users, authentication, onboarding, admin, and storage. It also loads environment variables
     and sets up dependency injection for services such as database connections.
     """
+    app = FastAPI()
 
     app.add_middleware(
         CORSMiddleware,

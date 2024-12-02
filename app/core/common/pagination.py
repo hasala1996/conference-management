@@ -1,3 +1,7 @@
+"""
+Pagination utilities.
+"""
+
 from typing import Generic, List, Optional, TypeVar
 
 from fastapi import Query

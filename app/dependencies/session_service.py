@@ -1,3 +1,7 @@
+"""
+Session service dependencies.
+"""
+
 from adapters.api.dependencies import get_db
 from adapters.database.repository.session_repository import SessionRepositoryImpl
 from core.session.services import SessionService

@@ -1,3 +1,7 @@
+"""
+Session API endpoints.
+"""
+
 from core.common.pagination import PaginatedResponse, PaginationParams
 from core.session.schemas import (
     SessionCreate,
@@ -32,7 +36,7 @@ def list_speakers(
     return session_service.list_speakers(params=pagination)
 
 
-@router.post("/", response_model=SessionOut)
+@router.post("/", response_model=SessionOut, status_code=status.HTTP_201_CREATED)
 def create_session(
     session_data: SessionCreate,
     session_service: SessionService = Depends(get_session_service),

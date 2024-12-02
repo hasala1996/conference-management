@@ -79,6 +79,8 @@ class UserOut(BaseModel):
     is_active: bool
 
     class Config:
+        """Config for user output."""
+
         from_attributes = True
 
 
@@ -101,4 +103,6 @@ class UserDetail(BaseModel):
     updated_at: datetime
 
     class Config:
+        """Config for user detail."""
+
         from_attributes = True

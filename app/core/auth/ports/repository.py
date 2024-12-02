@@ -3,7 +3,7 @@ Abstract repository for user management.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import Optional
 from uuid import UUID
 
 from adapters.database.models.user_model import User

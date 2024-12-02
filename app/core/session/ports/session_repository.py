@@ -1,3 +1,7 @@
+"""
+Session repository interface.
+"""
+
 from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple
 from uuid import UUID
@@ -12,6 +16,8 @@ from core.session.schemas import (
 
 
 class SessionRepository(ABC):
+    """Session repository interface."""
+
     @abstractmethod
     def create_session(self, session_data: SessionCreate) -> SessionOut:
         """Create a new session with the provided session data.
