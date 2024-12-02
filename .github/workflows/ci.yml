@@ -51,7 +51,8 @@ jobs:
 
       - name: Run Database Migrations
         run: |
-          alembic -c app/alembic.ini upgrade head
+          cd app
+          alembic -c alembic.ini upgrade head
 
       - name: Run Tests with Coverage
         run: |
